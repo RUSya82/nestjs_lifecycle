@@ -13,6 +13,7 @@ export class UsersService {
 	}
 
 	findOne(id: number) {
+		console.log('Service Called');
 		return `This action returns a #${id} user`;
 	}
 

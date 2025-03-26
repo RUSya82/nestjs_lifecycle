@@ -20,7 +20,7 @@ import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { TransformInterceptor } from './interceptors/transform.interceptor';
 
 @Controller('users')
-@UseInterceptors(LoggingInterceptor)
+// @UseInterceptors(LoggingInterceptor)
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
@@ -33,16 +33,17 @@ export class UsersController {
 	// Пример использования DefaultValuePipe, совместно с ParseBoolPipe
 	@Get()
 	@UseGuards(AuthGuard, RoleGuard)
-	@UseInterceptors(ExampleInterceptor, TransformInterceptor)
+	@UseInterceptors(ExampleInterceptor)
 	@Roles(['admin'])
 	findAll(@Query('asc', new DefaultValuePipe(true), ParseBoolPipe) asc: boolean) {
 		return this.usersService.findAll(asc);
 	}
 
-	// Пример использования ParseIntPipe с созданием экземпляра и передачей параметров
-	//
 	@Get(':id')
-	findOne(@Param('id', new ParseIntPipe({errorHttpStatusCode: HttpStatus.BAD_REQUEST})) id: string) {
+	@UseGuards(AuthGuard)
+	@UseInterceptors(ExampleInterceptor)
+	findOne(@Param('id', MyParseIntPipe) id: string) {
+		console.log('Controller Called');
 		return this.usersService.findOne(+id);
 	}
 

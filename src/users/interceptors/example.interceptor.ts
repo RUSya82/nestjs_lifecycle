@@ -8,7 +8,7 @@ export class ExampleInterceptor implements NestInterceptor {
 		console.log('ExampleInterceptor before request...');
 
 		return next.handle().pipe(
-			tap((data) => console.log('ExampleInterceptor after response...', data)),
+			tap((data) => console.log('ExampleInterceptor after response...')),
 		);
 	}
 }
