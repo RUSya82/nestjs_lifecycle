@@ -5,13 +5,16 @@ import {
 	Body,
 	Patch,
 	Param,
-	Delete, ParseBoolPipe, Query, DefaultValuePipe, ParseIntPipe, HttpStatus,
+	Delete, ParseBoolPipe, Query, DefaultValuePipe, ParseIntPipe, HttpStatus, UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { MyParseIntPipe } from './pipes/myParseInt.pipe';
 import { IsMongoIdPipe } from './pipes/isMongoId.pipe';
+import { RoleGuard } from './guards/role.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { Roles } from './roles.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -25,6 +28,8 @@ export class UsersController {
 
 	// Пример использования DefaultValuePipe, совместно с ParseBoolPipe
 	@Get()
+	@UseGuards(AuthGuard, RoleGuard)
+	@Roles(['admin'])
 	findAll(@Query('asc', new DefaultValuePipe(true), ParseBoolPipe) asc: boolean) {
 		return this.usersService.findAll(asc);
 	}
