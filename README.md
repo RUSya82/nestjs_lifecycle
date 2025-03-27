@@ -1,5 +1,5 @@
 # Код для статьи на сайте wp-lancer.ru
-## Статья -
+## Статья - https://wp-lancer.ru/middleware-pipes-guards-interceptors-tsikl-zaprosa-v-nest-js/
 
 Ветки репозитория расположены по разделам статьи - middlewares, pipes, guards, interceptors
 
