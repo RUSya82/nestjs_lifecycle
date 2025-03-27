@@ -1,5 +1,5 @@
 # Код для статьи на сайте wp-lancer.ru
-## Статья - 
+## Статья - https://wp-lancer.ru/middleware-pipes-guards-interceptors-tsikl-zaprosa-v-nest-js/
 
 Ветки репозитория расположены по разделам статьи - middlewares, pipes, guards, interceptors
 
@@ -43,5 +43,5 @@ GET -запросом на http://localhost:3000/users/
 ## Тестирование Guards
 Переходим в ветку guards
 В Postman или Insomnia ставим заголовок запроса token, равный cat
-Если токен есть, то запрос проходит, если его нет, то получаем 403
+Если токен есть, то GET запрос http://localhost:3000/users/ проходит, если его нет, то получаем 403
 
