@@ -19,6 +19,9 @@ export class TasksService {
   findAll() {
     return this.taskRepository.find({relations: ["user"]});
   }
+  updateUser(id: number, user: User){
+    return this.update(id, { user });
+  }
 
   findOne(id: number) {
     return this.taskRepository.findOneBy([{id}]);

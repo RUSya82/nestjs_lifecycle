@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  NotFoundException,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -29,6 +40,16 @@ export class TasksController {
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateTaskDto: UpdateTaskDto) {
     return this.tasksService.update(+id, updateTaskDto);
+  }
+  @Patch('updateUser/:taskId')
+  changeUser(
+    @Param('taskId', ParseIntPipe) id: number,
+    @Query('userId', UserEntityPipe) user: User
+  ){
+    if(!user){
+      throw new NotFoundException(`User not found`)
+    }
+    return this.tasksService.updateUser(id, user);
   }
 
   @Delete(':id')
