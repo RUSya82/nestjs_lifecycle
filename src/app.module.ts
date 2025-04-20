@@ -14,7 +14,8 @@ import { Task } from './tasks/entities/task.entity';
 		TypeOrmModule.forRoot({
 			type:"sqlite",
 			database: "db.sqlite",
-			entities: [User, Task],
+			// entities: [User, Task],
+			autoLoadEntities: true,
 			synchronize: true   //Синхронизирует изменения в БД
 		}),
 		TasksModule
